@@ -12,21 +12,23 @@ namespace Tournament_421_HusnutdinovFD.Components
     using System;
     using System.Collections.Generic;
     
-    public partial class Organizer
+    public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Organizer()
+        public Users()
         {
-            this.Tournament = new HashSet<Tournament>();
+            this.Organizer = new HashSet<Organizer>();
+            this.Player = new HashSet<Player>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string ContactInfo { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
     
-        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tournament> Tournament { get; set; }
+        public virtual ICollection<Organizer> Organizer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Player> Player { get; set; }
     }
 }

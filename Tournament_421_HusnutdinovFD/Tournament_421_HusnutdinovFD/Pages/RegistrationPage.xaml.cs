@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Tournament_421_HusnutdinovFD.Pages;
 
-namespace Tournament_421_HusnutdinovFD
+namespace Tournament_421_HusnutdinovFD.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для RegistrationPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegistrationPage : Page
     {
-        public MainWindow()
+        public RegistrationPage()
         {
             InitializeComponent();
-            MyFrame.Navigate(new AuthorizationPage());
         }
     }
 }

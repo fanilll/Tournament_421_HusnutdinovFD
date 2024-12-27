@@ -35,6 +35,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="ContactInfo" Type="varchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -42,10 +43,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="Role" Type="varchar" MaxLength="50" />
           <Property Name="TeamID" Type="int" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="RegistrationTournament">
           <Key>
@@ -85,6 +85,15 @@
           <Property Name="RegistrationDate" Type="datetime" />
           <Property Name="Ryles" Type="varchar" MaxLength="250" />
           <Property Name="OrganizerID" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Match_Team">
           <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
@@ -158,6 +167,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Organizer_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Organizer" Type="Self.Organizer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organizer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Player_Team">
           <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
           <End Role="Player" Type="Self.Player" Multiplicity="*" />
@@ -167,6 +188,18 @@
             </Principal>
             <Dependent Role="Player">
               <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -215,6 +248,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tournament" EntityType="Self.Tournament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Match_Team" Association="Self.FK_Match_Team">
             <End Role="Team" EntitySet="Team" />
             <End Role="Match" EntitySet="Match" />
@@ -239,8 +273,16 @@
             <End Role="Player" EntitySet="Player" />
             <End Role="MatchStats" EntitySet="MatchStats" />
           </AssociationSet>
+          <AssociationSet Name="FK_Organizer_Users" Association="Self.FK_Organizer_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Organizer" EntitySet="Organizer" />
+          </AssociationSet>
           <AssociationSet Name="FK_Player_Team" Association="Self.FK_Player_Team">
             <End Role="Team" EntitySet="Team" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Users" Association="Self.FK_Player_Users">
+            <End Role="Users" EntitySet="Users" />
             <End Role="Player" EntitySet="Player" />
           </AssociationSet>
           <AssociationSet Name="FK_RegistrationTournament_Team" Association="Self.FK_RegistrationTournament_Team">
@@ -298,6 +340,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ContactInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Organizer_Users" FromRole="Organizer" ToRole="Users" />
           <NavigationProperty Name="Tournament" Relationship="Self.FK_Tournament_Organizer" FromRole="Organizer" ToRole="Tournament" />
         </EntityType>
         <EntityType Name="Player">
@@ -306,12 +350,12 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TeamID" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="MatchStats" Relationship="Self.FK_MatchStats_Player" FromRole="Player" ToRole="MatchStats" />
           <NavigationProperty Name="Team" Relationship="Self.FK_Player_Team" FromRole="Player" ToRole="Team" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Player_Users" FromRole="Player" ToRole="Users" />
         </EntityType>
         <EntityType Name="RegistrationTournament">
           <Key>
@@ -361,6 +405,17 @@
           <NavigationProperty Name="Match" Relationship="Self.FK_Match_Tournament1" FromRole="Tournament" ToRole="Match" />
           <NavigationProperty Name="Organizer" Relationship="Self.FK_Tournament_Organizer" FromRole="Tournament" ToRole="Organizer" />
           <NavigationProperty Name="RegistrationTournament" Relationship="Self.FK_RegistrationTournament_Tournament" FromRole="Tournament" ToRole="RegistrationTournament" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Organizer" Relationship="Self.FK_Organizer_Users" FromRole="Users" ToRole="Organizer" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_Player_Users" FromRole="Users" ToRole="Player" />
         </EntityType>
         <Association Name="FK_Match_Team">
           <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
@@ -434,6 +489,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Organizer_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Organizer" Type="Self.Organizer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organizer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tournament_Organizer">
           <End Role="Organizer" Type="Self.Organizer" Multiplicity="0..1" />
           <End Role="Tournament" Type="Self.Tournament" Multiplicity="*" />
@@ -455,6 +522,18 @@
             </Principal>
             <Dependent Role="Player">
               <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -491,6 +570,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Team" EntityType="Self.Team" />
           <EntitySet Name="Tournament" EntityType="Self.Tournament" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_Match_Team" Association="Self.FK_Match_Team">
             <End Role="Team" EntitySet="Team" />
             <End Role="Match" EntitySet="Match" />
@@ -515,12 +595,20 @@
             <End Role="Player" EntitySet="Player" />
             <End Role="MatchStats" EntitySet="MatchStats" />
           </AssociationSet>
+          <AssociationSet Name="FK_Organizer_Users" Association="Self.FK_Organizer_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Organizer" EntitySet="Organizer" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tournament_Organizer" Association="Self.FK_Tournament_Organizer">
             <End Role="Organizer" EntitySet="Organizer" />
             <End Role="Tournament" EntitySet="Tournament" />
           </AssociationSet>
           <AssociationSet Name="FK_Player_Team" Association="Self.FK_Player_Team">
             <End Role="Team" EntitySet="Team" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Users" Association="Self.FK_Player_Users">
+            <End Role="Users" EntitySet="Users" />
             <End Role="Player" EntitySet="Player" />
           </AssociationSet>
           <AssociationSet Name="FK_RegistrationTournament_Team" Association="Self.FK_RegistrationTournament_Team">
@@ -569,6 +657,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ContactInfo" ColumnName="ContactInfo" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -577,10 +666,9 @@
               <MappingFragment StoreEntitySet="Player">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -624,6 +712,16 @@
                 <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
                 <ScalarProperty Name="Ryles" ColumnName="Ryles" />
                 <ScalarProperty Name="OrganizerID" ColumnName="OrganizerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TournamentDB_421_HusnutdinovFDModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

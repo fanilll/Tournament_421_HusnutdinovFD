@@ -33,5 +33,6 @@ namespace Tournament_421_HusnutdinovFD.Components
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Team> Team { get; set; }
         public virtual DbSet<Tournament> Tournament { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }
