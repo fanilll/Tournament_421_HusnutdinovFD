@@ -8,7 +8,29 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TournamentListPage">
 
-    <Grid>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListView x:Name="TournamentList" Grid.Row="0">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Название" Width="150" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                        <GridViewColumn Header="Тип" Width="150" DisplayMemberBinding="{Binding Type}"></GridViewColumn>
+                        <GridViewColumn Header="Дата начала" Width="100" DisplayMemberBinding="{Binding StartDate}"></GridViewColumn>
+                        <GridViewColumn Header="Дата окончания" Width="100" DisplayMemberBinding="{Binding EndDate}"></GridViewColumn>
+                        <GridViewColumn Header="Дата регистрация" Width="100" DisplayMemberBinding="{Binding RegistrationDate}"></GridViewColumn>
+                        <GridViewColumn Header="Организатор" Width="150" DisplayMemberBinding="{Binding Organizer.Name}"></GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="AddButt" Margin="0,0,0,0" Click="AddButt_Click">Добавить</Button>
+            <Button x:Name="EditButt" Margin="10,0,0,0" Click="EditButt_Click">Изменить</Button>
+        </StackPanel>
         
     </Grid>
 </Page>

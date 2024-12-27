@@ -23,6 +23,17 @@ namespace Tournament_421_HusnutdinovFD.Pages
         public TournamentListPage()
         {
             InitializeComponent();
+            TournamentList.ItemsSource = App.db.Tournament.ToList();
+        }
+
+        private void AddButt_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddEditTournamentPage());
+        }
+
+        private void EditButt_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
