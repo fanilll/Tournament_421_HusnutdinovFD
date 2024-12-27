@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tournament_421_HusnutdinovFD", "Tournament_421_HusnutdinovFD\Tournament_421_HusnutdinovFD.csproj", "{16726681-E16F-4F3F-AE53-8A14547F31D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16726681-E16F-4F3F-AE53-8A14547F31D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16726681-E16F-4F3F-AE53-8A14547F31D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16726681-E16F-4F3F-AE53-8A14547F31D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16726681-E16F-4F3F-AE53-8A14547F31D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE946527-C00B-4438-9343-53114408C2AC}
+	EndGlobalSection
+EndGlobal
