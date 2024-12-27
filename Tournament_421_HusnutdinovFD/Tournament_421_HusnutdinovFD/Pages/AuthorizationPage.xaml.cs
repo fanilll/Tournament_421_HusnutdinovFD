@@ -33,8 +33,17 @@ namespace Tournament_421_HusnutdinovFD.Pages
 
             if (user != null)
             {
-                NavigationService.Navigate(new TournamentListPage());
-                MessageBox.Show("Вы успешно вошли!");
+                if(user.Role == "Организатор")
+                {
+                    NavigationService.Navigate(new TournamentListPage());
+                    MessageBox.Show("Вы успешно вошли!");
+                }
+                else if (user.Role == "Игрок")
+                {
+                    NavigationService.Navigate(new MatchListPage());
+                    MessageBox.Show("Вы успешно вошли!");
+                }
+
             }
             else
                 MessageBox.Show("Неверный пароль или логин!");
@@ -42,7 +51,7 @@ namespace Tournament_421_HusnutdinovFD.Pages
 
         private void RegBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new RegistrationPage());
+
         }
     }
 }

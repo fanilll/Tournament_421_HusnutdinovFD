@@ -8,7 +8,42 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegistrationPage">
 
-    <Grid>
-        
+    <Grid Background="white">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontSize="30" FontWeight="Bold" Margin="0 0 0 30" HorizontalAlignment="Center">Регистрация на турнир</TextBlock>
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <TextBlock Width="100">Название</TextBlock>
+            <TextBox Width="200" Name="NameTb" Text="{Binding Name}"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <TextBlock Width="100">Тип</TextBlock>
+            <TextBox Width="200" Name="TypeTb" Text="{Binding Type}"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <TextBlock Width="100">Дата начала</TextBlock>
+            <DatePicker Width="300" x:Name="DateDp" Text="{Binding StartDate}"></DatePicker>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <TextBlock Width="100">Дата окончания</TextBlock>
+            <DatePicker Width="300" x:Name="EndDateDp" Text="{Binding EndDate}"></DatePicker>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+            <TextBlock Width="100">Дата регистрации</TextBlock>
+            <DatePicker Width="300" x:Name="RegDateDp" Text="{Binding RegistrationDate}"></DatePicker>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+            <TextBlock Width="100">Организатор</TextBlock>
+            <ComboBox Width="300" x:Name="OrgCb" Text="{Binding Tournament.Organizer}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                                <Run Text="{Binding Name}"></Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <Button Name="CreateButt" Click="CreateButt_Click">Создать турнир</Button>
+        </StackPanel>
     </Grid>
 </Page>
