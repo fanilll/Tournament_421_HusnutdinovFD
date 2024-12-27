@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="47a2b7761c214eb1bf1af55a84e0aa00" Name="Diagram1">
+        <EntityTypeShape EntityType="TournamentDB_421_HusnutdinovFDModel.Match" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TournamentDB_421_HusnutdinovFDModel.MatchStats" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TournamentDB_421_HusnutdinovFDModel.Organizer" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TournamentDB_421_HusnutdinovFDModel.Player" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TournamentDB_421_HusnutdinovFDModel.RegistrationTournament" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TournamentDB_421_HusnutdinovFDModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TournamentDB_421_HusnutdinovFDModel.Team" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TournamentDB_421_HusnutdinovFDModel.Tournament" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_Match_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_Match_Team1" ManuallyRouted="false" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_Match_Team2" ManuallyRouted="false" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_Match_Tournament1" ManuallyRouted="false" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_MatchStats_Match" ManuallyRouted="false" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_MatchStats_Player" ManuallyRouted="false" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_Tournament_Organizer" ManuallyRouted="false" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_Player_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_RegistrationTournament_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="TournamentDB_421_HusnutdinovFDModel.FK_RegistrationTournament_Tournament" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
